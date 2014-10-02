@@ -14,35 +14,38 @@ var images = [
                "Tulips.jpg"
              ]
 
-window.onoload = function() {
-	var imageElement = document.getElementById("Single Image")
-	var captionElement = document.getElementById("caption")
+//window.onoload = function() {
 	
-	var imageNo = Math.random()*images.length;
+	var imageElement = document.getElementById("image_box");
+	var captionElement = document.getElementById("caption");
+	
+	var imageNo = Math.floor(Math.random()*images.length);
 	displayImage();
 	
-	document.getElementById("left").addEventListener("click", moveLeft, useCapture);
-	document.getElementById("right").addEventListener("click", moveRight, useCapture);
+	document.getElementById("left").addEventListener("click", moveLeft);
+	document.getElementById("right").addEventListener("click", moveRight);
 	
 	function moveLeft() {
 		// decrement image no
-		
+		 imageNo = (imageNo - 1 + images.length) % images.length;
 		
 		displayImage();
 	}
 	
 	function moveRight() {
 		// increment image no
+		imageNo = (imageNo + 1) % images.length;
 	
-		displayimage();
+		displayImage();
 	}
 	
 	function displayImage() {
 		var imageFile = images[imageNo];
 		var imageName = imageFile.split(".")[0];
 		
-		imageElement.src = "../images/" + imageName;
+		imageElement.src = "images/" + imageFile;
 		imageElement.alt = imageName;
+		imageElement.title=imageFile;
 		captionElement.innerHTML = imageName;
 	}
-}
+//}
